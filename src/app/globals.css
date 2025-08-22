@@ -1,28 +1,26 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 212 22% 13%;
-    --primary: 196 100% 47%;
-    --primary-foreground: 0 0 100%;
-    --secondary: 196 7% 43%;
-    --secondary-foreground: 0 0 90%;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --background: 212 22% 13;
-      --foreground: 0 0% 100%;
-      --secondary: 240 3.7% 15.9%;
-    }
-  }
+@theme {
+  --color-background: hsl(0 0% 100%);
+  --color-background-dark: hsl(212 22% 13%);
+  --color-foreground: hsl(212 22% 13%);
+  --color-foreground-dark: hsl(0 0% 100%);
+  --color-primary: hsl(196 100% 47%);
+  --color-primary-foreground: hsl(0 0 100%);
+  --color-secondary: hsl(196 7% 43%);
+  --color-secondary-dark: hsl(240 3.7% 15.9%);
+  --color-secondary-foreground: hsl(0 0 90%);
 }
 
 @layer base {
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+
+    @variant dark {
+      background-color: var(--color-background-dark);
+      color: var(--color-foreground-dark);
+    }
   }
 }

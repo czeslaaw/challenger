@@ -8,12 +8,12 @@ export default async function PopularEvents() {
 
   return (
     <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
-      <h1 className="text-xl text-black md:col-span-3 flex items-center gap-2">
+      <h1 className="text-xl text-black dark:text-white md:col-span-3 flex items-center gap-2">
         <Calendar /> Popular events
       </h1>
 
       {events.map((event) => (
-        <div className="relative aspect-video rounded-lg overflow-hidden">
+        <div key={event.id} className="relative aspect-video rounded-lg overflow-hidden">
           <div className="absolute inset-x-0 bottom-0 p-2">
             <h1 className="text-sm text-primary-foreground">{event.name}</h1>
             <p className="text-xs text-secondary-foreground">
