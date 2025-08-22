@@ -1,4 +1,13 @@
-const locations = [
+// Location is JS global, so we use LocationItem
+export interface LocationItem {
+  id: number
+  name: string
+  city: string
+  country: string
+  imageUrl: string
+}
+
+const locations: LocationItem[] = [
   {
     id: 1,
     name: "Biddinghuizen",
@@ -48,9 +57,28 @@ const locations = [
     country: "Netherlands",
     imageUrl: "https://placehold.co/600x400?text=AFAS+Live",
   },
-];
+]
 
-const events = [
+export function getLocations() {
+  return locations
+}
+
+// Event is JS global so we use EventItem
+export interface EventItem {
+  id: number
+  name: string
+  alerts: number
+  date: string
+  locationId: number
+  description: string | null
+  imageUrl: string
+}
+
+export interface EventWithLocation extends EventItem {
+  location: LocationItem
+}
+
+const events: EventItem[] = [
   {
     id: 1,
     name: "Lowlands Festival",
@@ -158,8 +186,8 @@ const events = [
     imageUrl:
       "https://cdn.ticketswap.com/static/images/placeholders/concert-1.jpg",
   },
-];
+]
 
-export async function getEvents() {
+export function getEvents() {
   return events
 }

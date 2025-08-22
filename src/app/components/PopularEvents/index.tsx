@@ -1,25 +1,29 @@
-"use client";
+"use client"
 
-import { Calendar, Loader, AArrowUp } from "lucide-react";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import { Calendar, Loader, AArrowUp } from "lucide-react"
+import Image from "next/image"
+import { useEffect, useState } from "react"
+
+import { getJSON } from "@/lib/utils"
+import type { EventWithLocation } from "@/lib/mock-data"
+import { PopularEventsResponse } from "@/app/api/events/popular/route"
 
 export function PopularEvents() {
-  const [events, setEvents] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [events, setEvents] = useState<EventWithLocation[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchPopularEvents = async () => {
-      const data = await fetch("/api/events/popular?amount=6").then(
-        (response) => response.json()
-      );
+      const response = await getJSON<PopularEventsResponse>(
+        "/api/events/popular?amount=6"
+      )
 
-      setEvents(data.events);
-      setLoading(false);
-    };
+      setEvents(response.events)
+      setLoading(false)
+    }
 
-    fetchPopularEvents();
-  }, []);
+    fetchPopularEvents()
+  }, [])
 
   return (
     <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
@@ -38,7 +42,8 @@ export function PopularEvents() {
           <div className="absolute inset-x-0 bottom-0 p-2">
             <h1 className="text-sm text-primary-foreground">{event.name}</h1>
             <p className="text-xs text-secondary-foreground">
-              {event.locationId} - {new Date(event.date).toLocaleDateString()}
+              {event.location.name} -{" "}
+              {new Date(event.date).toLocaleDateString()}
             </p>
           </div>
 
@@ -51,5 +56,5 @@ export function PopularEvents() {
         </div>
       ))}
     </div>
-  );
+  )
 }
