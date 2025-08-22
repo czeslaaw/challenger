@@ -48,7 +48,9 @@ export function PopularEvents() {
           </div>
 
           <Image
+            role="presentation"
             className="object-cover h-full w-full"
+            alt={event.name}
             src={event.imageUrl}
             width={320}
             height={200}
