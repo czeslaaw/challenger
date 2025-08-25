@@ -15,7 +15,7 @@ export async function GET(request: Request) {
   if (query === null) {
     return new Response("Query parameter is required", { status: 400 })
   }
-  if (locationIds !== null && locationIds.some((id) => Number.isNaN(id))) {
+  if (locationIds.some((id) => Number.isNaN(id))) {
     return new Response("Invalid locationIds parameter", { status: 400 })
   }
 
