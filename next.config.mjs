@@ -5,6 +5,9 @@ const nextConfig = {
       {
         hostname: "cdn.ticketswap.com",
       },
+      {
+        hostname: "placehold.co",
+      },
     ],
   },
 }
