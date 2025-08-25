@@ -31,7 +31,7 @@ export const database = {
 
     const options = {
       includeScore: true,
-      keys: ["name", { name: "description", weight: 0.5 }],
+      keys: ["name", { name: "description", weight: 0.5 }, { name: "location.name", weight: 0.5 }],
     }
     const fuse = new Fuse(events, options)
     const results = fuse.search(query)
