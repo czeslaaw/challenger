@@ -2,7 +2,7 @@ import Fuse from "fuse.js"
 import { EventWithLocation, getEvents, getLocations } from "./mock-data"
 
 export const database = {
-  getEventsWithLocation: async (locationIds: number[]): Promise<EventWithLocation[]> => {
+  getEventsWithLocation: (locationIds: number[]): EventWithLocation[] => {
     const events = getEvents()
     const locations = getLocations()
 
@@ -21,13 +21,13 @@ export const database = {
         }
       })
   },
-  getPopularEvents: async (amount: number, offset: number): Promise<EventWithLocation[]> => {
-    const events = await database.getEventsWithLocation([])
+  getPopularEvents: (amount: number, offset: number): EventWithLocation[] => {
+    const events = database.getEventsWithLocation([])
 
     return events.toSorted((a, b) => b.alerts - a.alerts).slice(offset, amount + offset)
   },
-  searchEvents: async (query: string, locationIds: number[]) => {
-    const events = await database.getEventsWithLocation(locationIds)
+  searchEvents: (query: string, locationIds: number[]) => {
+    const events = database.getEventsWithLocation(locationIds)
 
     const options = {
       includeScore: true,
@@ -38,8 +38,8 @@ export const database = {
 
     return results.map((result) => result.item)
   },
-  getEvent: async (id: number) => {
-    const events = await database.getEventsWithLocation([])
+  getEvent: (id: number) => {
+    const events = database.getEventsWithLocation([])
 
     return events.find((event) => event.id === id) ?? null
   },

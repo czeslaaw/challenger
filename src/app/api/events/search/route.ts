@@ -20,7 +20,7 @@ export async function GET(request: Request) {
   }
 
   const response: SearchEventsResponse = {
-    results: await database.searchEvents(query, locationIds),
+    results: database.searchEvents(query, locationIds),
   }
 
   return Response.json(response)

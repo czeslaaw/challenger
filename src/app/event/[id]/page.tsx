@@ -9,7 +9,7 @@ interface EventPageProps {
 
 export default async function EventPage({ params }: EventPageProps) {
   const { id } = await params
-  const event = await database.getEvent(Number(id))
+  const event = database.getEvent(Number(id))
 
   if (!event) {
     notFound()

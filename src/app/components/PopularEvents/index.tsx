@@ -5,7 +5,7 @@ import { database } from "@/lib/mock-db"
 import Link from "next/link"
 
 export default async function PopularEvents() {
-  const events = await database.getPopularEvents(6, 0)
+  const events = database.getPopularEvents(6, 0)
 
   return (
     <>
