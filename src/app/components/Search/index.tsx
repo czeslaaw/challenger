@@ -5,9 +5,12 @@ import { debounce } from "@/lib/utils"
 import { useEffect, useState, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Funnel } from "lucide-react"
 
 export function Search({ locations }: { locations: LocationItem[] }) {
+  const router = useRouter()
+
   const [query, setQuery] = useState<string>("")
   const [highlightedEventId, setHighlightedEventId] = useState<number | null>(null)
   const [results, setResults] = useState<EventWithLocation[]>([])
@@ -58,8 +61,13 @@ export function Search({ locations }: { locations: LocationItem[] }) {
     }
     if (e.key === "Enter") {
       e.preventDefault()
-      window.history.pushState({}, "", `/event/${highlightedEventId}`)
-      window.location.reload()
+      if (highlightedEventId === null) {
+        // @todo: maybe create a search result page?
+      } else {
+        router.push(`/event/${highlightedEventId}`)
+        setQuery("")
+        setHighlightedEventId(null)
+      }
     }
   }
 
@@ -126,7 +134,14 @@ export function Search({ locations }: { locations: LocationItem[] }) {
               }`}
               key={event.id}
             >
-              <Link href={`/event/${event.id}`} className="flex gap-2 items-center">
+              <Link
+                href={`/event/${event.id}`}
+                className="flex gap-2 items-center"
+                onClick={() => {
+                  setQuery("")
+                  setHighlightedEventId(null)
+                }}
+              >
                 <Image
                   src={event.imageUrl}
                   alt={event.name}
