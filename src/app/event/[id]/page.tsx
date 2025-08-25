@@ -1,5 +1,3 @@
-import { Logo } from "@/app/components/Logo"
-import { Search } from "@/app/components/Search"
 import { database } from "@/lib/mock-db"
 import { notFound } from "next/navigation"
 import Image from "next/image"
@@ -18,9 +16,7 @@ export default async function EventPage({ params }: EventPageProps) {
   }
 
   return (
-    <main className="max-w-3xl mx-auto p-4 my-4 grid gap-5">
-      <Logo />
-      <Search />
+    <>
       <h1 className="text-3xl font-bold mb-4">{event.name}</h1>
       <Image src={event.imageUrl} alt={event.name} width={600} height={400} className="rounded-lg w-full" />
       <div className="flex flex-col gap-4">
@@ -56,6 +52,6 @@ export default async function EventPage({ params }: EventPageProps) {
           </div>
         </div>
       </div>
-    </main>
+    </>
   )
 }
