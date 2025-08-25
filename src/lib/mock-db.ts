@@ -3,8 +3,6 @@ import { EventWithLocation, getEvents, getLocations } from "./mock-data"
 
 export const database = {
   getEventsWithLocation: async (locationIds: number[]): Promise<EventWithLocation[]> => {
-    await fakeNetworkDelay()
-
     const events = getEvents()
     const locations = getLocations()
 
@@ -45,14 +43,7 @@ export const database = {
 
     return events.find((event) => event.id === id) ?? null
   },
-  getLocations: async () => {
-    await fakeNetworkDelay()
-
+  getLocations: () => {
     return getLocations()
   },
-}
-
-function fakeNetworkDelay(min: number = 100, max: number = 500) {
-  const ms = Math.random() * (max - min) + min
-  return new Promise((resolve) => setTimeout(resolve, ms))
 }
