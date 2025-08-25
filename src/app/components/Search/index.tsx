@@ -62,12 +62,12 @@ export function Search({ locations }: { locations: LocationItem[] }) {
     if (e.key === "Enter") {
       e.preventDefault()
       if (highlightedEventId === null) {
-        // @todo: maybe create a search result page?
+        router.push(`/event/search?query=${encodeURIComponent(query)}`)
       } else {
         router.push(`/event/${highlightedEventId}`)
-        setQuery("")
-        setHighlightedEventId(null)
       }
+      setQuery("")
+      setHighlightedEventId(null)
     }
   }
 
