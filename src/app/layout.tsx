@@ -3,7 +3,6 @@ import { Inter } from "next/font/google"
 import { Logo } from "./components/Logo"
 import { Search } from "./components/Search"
 import "./globals.css"
-import { database } from "@/lib/mock-db"
 import Link from "next/link"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -17,8 +16,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const locations = database.getLocations()
-
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -26,7 +23,7 @@ export default async function RootLayout({
           <Link href="/">
             <Logo />
           </Link>
-          <Search locations={locations} />
+          <Search />
           {children}
         </main>
       </body>
