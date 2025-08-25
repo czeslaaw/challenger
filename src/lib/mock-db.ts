@@ -2,14 +2,14 @@ import Fuse from "fuse.js"
 import { EventWithLocation, getEvents, getLocations } from "./mock-data"
 
 export const database = {
-  getEventsWithLocation: async (locationId: number | null): Promise<EventWithLocation[]> => {
+  getEventsWithLocation: async (locationIds: number[]): Promise<EventWithLocation[]> => {
     await fakeNetworkDelay()
 
     const events = getEvents()
     const locations = getLocations()
 
     return events
-      .filter((event) => (locationId ? event.locationId === locationId : true))
+      .filter((event) => (locationIds.length ? locationIds.includes(event.locationId) : true))
       .map((event) => {
         const location = locations.find((loc) => loc.id === event.locationId)
 
@@ -24,12 +24,12 @@ export const database = {
       })
   },
   getPopularEvents: async (amount: number, offset: number): Promise<EventWithLocation[]> => {
-    const events = await database.getEventsWithLocation(null)
+    const events = await database.getEventsWithLocation([])
 
     return events.toSorted((a, b) => b.alerts - a.alerts).slice(offset, amount + offset)
   },
-  searchEvents: async (query: string, locationId: number | null) => {
-    const events = await database.getEventsWithLocation(locationId)
+  searchEvents: async (query: string, locationIds: number[]) => {
+    const events = await database.getEventsWithLocation(locationIds)
 
     const options = {
       includeScore: true,
@@ -41,9 +41,14 @@ export const database = {
     return results.map((result) => result.item)
   },
   getEvent: async (id: number) => {
-    const events = await database.getEventsWithLocation(null)
+    const events = await database.getEventsWithLocation([])
 
     return events.find((event) => event.id === id) ?? null
+  },
+  getLocations: async () => {
+    await fakeNetworkDelay()
+
+    return getLocations()
   },
 }
 
