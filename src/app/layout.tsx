@@ -20,7 +20,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <main className="max-w-3xl mx-auto p-4 my-4 grid gap-5">
-          <Link href="/">
+          <Link href="/" aria-label="Go to homepage">
             <Logo />
           </Link>
           <Search />

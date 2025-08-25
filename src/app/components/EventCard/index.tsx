@@ -7,7 +7,6 @@ export function EventCard({ event }: { event: EventWithLocation }) {
   return (
     <Link href={`/event/${event.id}`} className="flex flex-col gap-1">
       <Image
-        role="presentation"
         className="object-cover h-full w-full aspect-video rounded-lg"
         alt={event.name}
         src={event.imageUrl}
