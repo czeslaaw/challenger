@@ -72,7 +72,7 @@ export function Search({ locations }: { locations: LocationItem[] }) {
   }
 
   return (
-    <div className="relative">
+    <search className="relative">
       <div className="flex gap-2">
         <div className="flex-1">
           <label htmlFor="search" className="sr-only">
@@ -156,7 +156,7 @@ export function Search({ locations }: { locations: LocationItem[] }) {
           ))}
         </ul>
       )}
-    </div>
+    </search>
   )
 }
 
