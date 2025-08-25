@@ -14,9 +14,9 @@ export default async function PopularEvents() {
       </h1>
 
       <ul className="list-none grid sm:grid-cols-2 md:grid-cols-3 gap-3">
-        {events.map((event) => (
+        {events.map((event, index) => (
           <li key={event.id}>
-            <EventCard event={event} />
+            <EventCard event={event} priority={index < 4} />
           </li>
         ))}
       </ul>

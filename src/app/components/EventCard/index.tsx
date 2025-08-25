@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { EventWithLocation } from "@/lib/mock-data"
 
-export function EventCard({ event }: { event: EventWithLocation }) {
+export function EventCard({ event, priority }: { event: EventWithLocation; priority?: boolean }) {
   return (
     <Link href={`/event/${event.id}`} className="flex flex-col gap-1">
       <Image
@@ -12,6 +12,7 @@ export function EventCard({ event }: { event: EventWithLocation }) {
         src={event.imageUrl}
         width={320}
         height={200}
+        priority={priority}
       />
       <p className="text-sm text-foreground dark:text-primary-foreground">{event.name}</p>
       <p className="text-xs text-gray-500 dark:text-gray-400">

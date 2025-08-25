@@ -40,9 +40,9 @@ export default async function SearchResults({ searchParams }: SearchResultsProps
       </div>
       {events.length ? (
         <ul className="list-none grid grid-cols-1 gap-3">
-          {events.map((event) => (
+          {events.map((event, index) => (
             <li key={event.id}>
-              <EventCard event={event} />
+              <EventCard event={event} priority={index < 2} />
             </li>
           ))}
         </ul>
