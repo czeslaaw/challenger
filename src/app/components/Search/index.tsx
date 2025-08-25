@@ -121,7 +121,7 @@ export function Search({ locations }: { locations: LocationItem[] }) {
         <ul className="absolute z-1 top-auto w-full rounded-b-md border-1 border-gray-300 bg-white dark:bg-gray-950">
           {results.map((event) => (
             <li
-              className={`p-2 border-b border-gray-300 dark:border-gray-700 hover:bg-gray-100 ${
+              className={`p-2 border-b border-gray-300 dark:border-gray-700 hover:bg-gray-100 hover:dark:bg-gray-800 ${
                 highlightedEventId === event.id ? "bg-gray-100 dark:bg-gray-800" : ""
               }`}
               key={event.id}
